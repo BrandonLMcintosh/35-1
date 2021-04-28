@@ -2,7 +2,16 @@ const express = require("express");
 const db = require("../db");
 const router = new express.Router();
 
-router.get("", async () => {});
+router.get("", async () => {
+	try {
+		const result = await db.query(`SELECT * FROM invoices`);
+		return result.json({
+			invoices: result,
+		});
+	} catch (err) {
+		next(err);
+	}
+});
 
 router.post("", async () => {});
 
