@@ -48,7 +48,7 @@ router.get("/:code", async (req, res, next) => {
 	}
 });
 
-router.put("/:code", async (req, res, next) => {
+router.patch("/:code", async (req, res, next) => {
 	try {
 		const code = req.params.code;
 		const { name, description } = req.body;
@@ -70,7 +70,7 @@ router.delete("/:code", async (req, res, next) => {
 	try {
 		const code = req.params.code;
 		await db.query(
-			`DELETE FROM users
+			`DELETE FROM companies
             WHERE code=$1`,
 			[code]
 		);

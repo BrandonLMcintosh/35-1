@@ -50,13 +50,13 @@ router.get("/:id", async (req, res, next) => {
 router.patch("/:id", async (req, res, next) => {
 	try {
 		const id = req.params.id;
-		const { comp_code, amt, paid, paid_date } = req.body;
+		const { amt, paid, paid_date } = req.body;
 		const result = await db.query(
 			`UPDATE invoices
-			SET comp_code=$1, amt=$2, paid=$3, paid_date=$4
-			WHERE id=$5
+			SET amt=$1, paid=$2, paid_date=$3
+			WHERE id=$4
 			RETURNING id, comp_code, amt, add_date, paid, paid_date`,
-			[comp_code, amt, paid, paid_date, id]
+			[amt, paid, paid_date, id]
 		);
 		return res.json({
 			updated_invoice: result.rows,
