@@ -21,7 +21,7 @@ router.post("", async (req, res, next) => {
 			(id, comp_code, amt, paid, add_date) 
 			VALUES ($1, $2, $3, $4, $5)
 			RETURNING id, comp_code, amt, paid, add_date, paid_date`,
-			[id, comp_code, amt, false, add_date]
+			[id, comp_code, amt, false]
 		);
 		res.json({
 			added_invoice: result.rows,
