@@ -15,17 +15,17 @@ router.get("", async (req, res, next) => {
 
 router.post("", async (req, res, next) => {
 	try {
-		const { id, comp_code, amt, add_date } = req.body;
+		const { id, comp_code, amt } = req.body;
 		const result = await db.query(
 			`INSERT INTO invoices 
 			(id, comp_code, amt, paid, add_date) 
 			VALUES ($1, $2, $3, $4, $5)
 			RETURNING id, comp_code, amt, paid, add_date, paid_date`,
-			[id, comp_code, amt, false]
+			[id, comp_code, amt, false, Date.now()]
 		);
 		res.json({
 			added_invoice: result.rows,
-		});
+		});  
 	} catch (err) {
 		next(err);
 	}
